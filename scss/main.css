@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+.instablack {
+  width: 120px;
+  margin-left: 20px;
+  position: absolute;
+  top: 20px;
+  left: 0;
+}
+
 .instaheader {
   max-width: 700px;
   width: 500px;
@@ -39,6 +47,7 @@
   background-color: white;
   border-radius: 50%;
   font-weight: 700;
+  cursor: pointer;
 }
 .instaheader__rtbtn {
   width: 30px;
@@ -48,6 +57,7 @@
   background-color: white;
   border-radius: 50%;
   font-weight: 700;
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar {
@@ -67,7 +77,9 @@
   margin: auto;
   border-radius: 20px;
   border: 2px solid white;
-  background-color: rgb(214, 87, 157);
+  -o-object-fit: cover;
+     object-fit: cover;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }
 .storypg__cross {
   position: absolute;

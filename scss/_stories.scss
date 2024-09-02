@@ -1,3 +1,11 @@
+.instablack{
+    width: 120px;
+    margin-left: 20px;
+    position: absolute;
+   top: 20px; 
+   left: 0;
+}
+
 .instaheader{
     max-width: 700px;
     width: 500px;
@@ -31,6 +39,7 @@
        background-color: white;
        border-radius: 50%;
        font-weight: 700;
+       cursor: pointer;
     }
     &__rtbtn{
         width: 30px;
@@ -40,6 +49,7 @@
         background-color: white;
         border-radius: 50%;
         font-weight: 700;
+        cursor: pointer;
     }
 }
 ::-webkit-scrollbar {
