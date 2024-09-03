@@ -105,6 +105,9 @@ storiesContainer.addEventListener('click',(e)=>{
         storyPg.style.display = 'flex';
         storiesContainer.style.display = 'none';
 
+        let vidContainer=document.createElement('div')
+        vidContainer.style.position='relative'
+
         let video = document.createElement("video");
         video.className = "storypg__uservid";
         video.width = 360;
@@ -116,6 +119,29 @@ storiesContainer.addEventListener('click',(e)=>{
         source.type = "video/mp4";
         video.appendChild(source);
 
+        
+        let rtbutton=document.createElement('button')
+        rtbutton.innerHTML=">"
+        rtbutton.style.width='30px'
+        rtbutton.style.height='30px'
+        rtbutton.style.borderRadius='50%'
+        rtbutton.style.position='absolute'
+        rtbutton.style.top='50%'
+        rtbutton.style.right='-40px'
+
+        let lftbutton=document.createElement('button')
+        lftbutton.innerHTML="<"
+        lftbutton.style.width='30px'
+        lftbutton.style.height='30px'
+        lftbutton.style.borderRadius='50%'
+        lftbutton.style.position='absolute'
+        lftbutton.style.top='50%'
+        lftbutton.style.left='-40px'
+        
+        vidContainer.appendChild(video)
+        vidContainer.appendChild(rtbutton)
+        vidContainer.appendChild(lftbutton)
+
         let cross=document.createElement('span')
         cross.textContent='X'
         cross.className='storypg__cross'
@@ -124,16 +150,34 @@ storiesContainer.addEventListener('click',(e)=>{
         instalogo.src='images/instaWhite.png'
         instalogo.className='storypg__instalogo'
 
-        storyPg.appendChild(video);
+        storyPg.appendChild(vidContainer);
         storyPg.appendChild(cross)
         storyPg.appendChild(instalogo)
 
         
 
         cross.addEventListener('click',()=>{
+            storyPg.innerHTML=''
             storyPg.style.display = 'none';
             storiesContainer.style.display = 'flex';
-            storyPg.innerHTML=''
+        })
+
+        function updateVid(index){
+            const newuser=userData[index]
+            if(newuser){
+                source.src=newuser.video;
+                video.load()
+            }
+        }
+        let currVidIndex = userData.findIndex(user => user.id === clickedId);
+        rtbutton.addEventListener('click',()=>{
+            currVidIndex=(currVidIndex+1)%userData.length
+            updateVid(currVidIndex)
+        })
+
+        lftbutton.addEventListener('click',()=>{
+            currVidIndex=(currVidIndex-1 + + userData.length)%userData.length
+            updateVid(currVidIndex)
         })
     }
     
