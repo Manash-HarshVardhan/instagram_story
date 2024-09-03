@@ -171,12 +171,12 @@ storiesContainer.addEventListener('click',(e)=>{
         }
         let currVidIndex = userData.findIndex(user => user.id === clickedId);
         rtbutton.addEventListener('click',()=>{
-            currVidIndex=(currVidIndex+1)%userData.length
+            currVidIndex=(currVidIndex+1) % userData.length
             updateVid(currVidIndex)
         })
 
         lftbutton.addEventListener('click',()=>{
-            currVidIndex=(currVidIndex-1 + + userData.length)%userData.length
+            currVidIndex=(currVidIndex-1 + userData.length) % userData.length
             updateVid(currVidIndex)
         })
     }
