@@ -10,7 +10,7 @@
     &__uservid{
     margin: auto;
     border-radius: 20px;
-    border: 2px solid white;
+    border: 2px solid $colorprimary;
     object-fit: cover;
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
    }
@@ -18,7 +18,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    color: white;
+    color: $colorprimary;
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
     cursor: pointer;
@@ -28,7 +28,7 @@
     top: 20px;
     left: 20px;
     width: 120px;
-    color: white;
+    color: $colorprimary;
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
    }

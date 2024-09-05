@@ -2,8 +2,8 @@
     width: 120px;
     margin-left: 20px;
     position: absolute;
-   top: 20px; 
-   left: 0;
+    top: 20px; 
+    left: 0;
 }
 
 .instaheader{
@@ -36,7 +36,7 @@
         height: 30px;
         position: absolute;
        left: 29%;
-       background-color: white;
+       background-color: $colorprimary;
        border-radius: 50%;
        font-weight: 700;
        cursor: pointer;
@@ -46,7 +46,7 @@
         height: 30px;
         position: absolute;
         right: 30%;
-        background-color: white;
+        background-color: $colorprimary;
         border-radius: 50%;
         font-weight: 700;
         cursor: pointer;
