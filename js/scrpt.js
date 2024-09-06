@@ -65,7 +65,7 @@ const lftbtn=document.querySelector('.instaheader__lftbtn')
 const rtbtn=document.querySelector('.instaheader__rtbtn')
 const storiesContainer=document.querySelector('.instaheader')
 const storyPg=document.querySelector('.storypg')
-//scrolling
+//scrolling stories
 lftbtn.addEventListener('click',()=>{
     const container = document.querySelector('.instaheader');
         container.scrollLeft -= 300; 
