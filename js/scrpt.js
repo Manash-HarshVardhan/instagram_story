@@ -1,3 +1,5 @@
+//instagram 3video script
+
 //json data 
 const userData=[
     {
@@ -65,18 +67,18 @@ const lftbtn=document.querySelector('.instaheader__lftbtn')
 const rtbtn=document.querySelector('.instaheader__rtbtn')
 const storiesContainer=document.querySelector('.instaheader')
 const storyPg=document.querySelector('.storypg')
-//scrolling stories
+
+
+//scrolling
 lftbtn.addEventListener('click',()=>{
     const container = document.querySelector('.instaheader');
         container.scrollLeft -= 300; 
-        
 })
+
 rtbtn.addEventListener('click',()=>{
     const container = document.querySelector('.instaheader');
 
-        container.scrollLeft +=300; 
-        
-        
+        container.scrollLeft +=300;    
 })
 
 userData.forEach(field=>{
@@ -97,12 +99,14 @@ userData.forEach(field=>{
 storiesContainer.addEventListener('click',(e)=>{
    
     const clickedId = parseInt(e.target.id);
+    
     e.target.style.borderColor='gray';
     const user = userData.find(user => user.id === clickedId);
-    
+    let currVidIndex = userData.findIndex(user => user.id === clickedId);
 
     if (user) {
         storyPg.style.display = 'flex';
+        storyPg.style.gap='10px'
         storiesContainer.style.display = 'none';
 
         let vidContainer=document.createElement('div')
@@ -118,29 +122,62 @@ storiesContainer.addEventListener('click',(e)=>{
         source.src = user.video; 
         source.type = "video/mp4";
         video.appendChild(source);
+////////////  lft video container
+        let lftvidContainer=document.createElement('div')
+        lftvidContainer.style.position='relative'
+        let lftvideo = document.createElement("video");
+        lftvideo.className = "storypg__uservid";
+        lftvideo.width = 240;
+        lftvideo.height = 360;
+        lftvideo.controls = true;
 
-        
-        let rtbutton=document.createElement('button')
-        rtbutton.innerHTML=">"
-        rtbutton.style.width='30px'
-        rtbutton.style.height='30px'
-        rtbutton.style.borderRadius='50%'
-        rtbutton.style.position='absolute'
-        rtbutton.style.top='50%'
-        rtbutton.style.right='-40px'
+        let lftsource = document.createElement("source");
+        lftsource.src = userData[currVidIndex-1].video; 
+        lftsource.type = "video/mp4";
+        lftvideo.appendChild(lftsource);
+        lftvidContainer.appendChild(lftvideo)
 
-        let lftbutton=document.createElement('button')
-        lftbutton.innerHTML="<"
-        lftbutton.style.width='30px'
-        lftbutton.style.height='30px'
-        lftbutton.style.borderRadius='50%'
-        lftbutton.style.position='absolute'
-        lftbutton.style.top='50%'
-        lftbutton.style.left='-40px'
+        //////////  rtvideocontainer
+
+        let rtvidContainer=document.createElement('div')
+        rtvidContainer.style.position='relative'
+
+        let rtvideo = document.createElement("video");
+        rtvideo.className = "storypg__uservid";
+        rtvideo.width = 240;
+        rtvideo.height = 360;
+        rtvideo.controls = true;
+
+        let rtsource = document.createElement("source");
+        rtsource.src = userData[currVidIndex+1].video; 
+        rtsource.type = "video/mp4";
+        rtvideo.appendChild(rtsource);
+
+        rtvidContainer.appendChild(rtvideo)
+
+        //////
+        let nxtbtn=document.createElement('button')
+        nxtbtn.innerHTML=">"
+        nxtbtn.style.width='30px'
+        nxtbtn.style.height='30px'
+        nxtbtn.style.borderRadius='50%'
+        nxtbtn.style.position='absolute'
+        nxtbtn.style.top='50%'
+        nxtbtn.style.right='-40px'
+
+        let prevbtn=document.createElement('button')
+        prevbtn.innerHTML="<"
+        prevbtn.style.width='30px'
+        prevbtn.style.height='30px'
+        prevbtn.style.borderRadius='50%'
+        prevbtn.style.position='absolute'
+        prevbtn.style.top='50%'
+        prevbtn.style.left='-40px'
         
         vidContainer.appendChild(video)
-        vidContainer.appendChild(rtbutton)
-        vidContainer.appendChild(lftbutton)
+        
+        lftvidContainer.appendChild(prevbtn)
+        rtvidContainer.appendChild(nxtbtn)
 
         let cross=document.createElement('span')
         cross.textContent='X'
@@ -150,10 +187,12 @@ storiesContainer.addEventListener('click',(e)=>{
         instalogo.src='images/instaWhite.png'
         instalogo.className='storypg__instalogo'
 
-        storyPg.appendChild(vidContainer);
         storyPg.appendChild(cross)
         storyPg.appendChild(instalogo)
-
+        storyPg.appendChild(lftvidContainer)
+        storyPg.appendChild(vidContainer);
+        storyPg.appendChild(rtvidContainer)
+        video.play()
         
 
         cross.addEventListener('click',()=>{
@@ -166,18 +205,27 @@ storiesContainer.addEventListener('click',(e)=>{
             const newuser=userData[index]
             if(newuser){
                 source.src=newuser.video;
+                lftsource.src = userData[currVidIndex-1].video; 
+                rtsource.src = userData[currVidIndex+1].video; 
                 video.load()
+                video.play()
+                lftvideo.load()
+                rtvideo.load()
             }
         }
-        let currVidIndex = userData.findIndex(user => user.id === clickedId);
-        rtbutton.addEventListener('click',()=>{
+        
+        nxtbtn.addEventListener('click',()=>{
             currVidIndex=(currVidIndex+1) % userData.length
             updateVid(currVidIndex)
+            const newSelectedElement = document.getElementById(userData[currVidIndex].id);
+            newSelectedElement.style.borderColor = 'gray';
         })
 
-        lftbutton.addEventListener('click',()=>{
+        prevbtn.addEventListener('click',()=>{
             currVidIndex=(currVidIndex-1 + userData.length) % userData.length
             updateVid(currVidIndex)
+            const newSelectedElement = document.getElementById(userData[currVidIndex].id);
+            newSelectedElement.style.borderColor = 'gray';
         })
     }
     
